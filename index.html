@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My CV | Pastel Single-Page with Extra Parallax</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts Example -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- GSAP for scroll animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* Reset some basic tags */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto Mono', monospace;
+      background: #fefefe;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Smooth scrolling in modern browsers */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Pastel color palette (adjust if desired) */
+    :root {
+      --pastel-yellow: #ffefa1;
+      --pastel-pink:   #ffd9ec;
+      --pastel-blue:   #d9eeff;
+      --pastel-purple: #e7deff;
+      --pastel-green:  #d9ffd8;
+      --text-color:    #333;
+    }
+
+    /* Basic section layout */
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative; /* So shapes can be positioned absolutely inside */
+      overflow: hidden;   /* Hide overflowing shapes */
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      line-height: 1.6;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* NAVBAR / fixed header */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 999;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-color);
+      margin: 0 15px;
+      position: relative;
+      font-weight: 700;
+    }
+
+    /* Underline hover effect on nav links */
+    nav a::after {
+      content: '';
+      width: 0%;
+      height: 2px;
+      background: var(--text-color);
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Color-coded sections */
+    .hero {
+      background: var(--pastel-yellow);
+    }
+    .about {
+      background: var(--pastel-pink);
+    }
+    .experience {
+      background: var(--pastel-blue);
+    }
+    .skills {
+      background: var(--pastel-purple);
+    }
+    .experiments {
+      background: var(--pastel-green);
+    }
+    .contact {
+      background: var(--pastel-yellow);
+    }
+
+    /* "Card" style containers */
+    .info-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 280px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Transparent shapes for flair (two shapes per section) */
+    /* Hero shapes */
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.3; /* Adjust to make shapes more or less visible */
+      z-index: 1;   /* So text is above shapes */
+    }
+    .shape-hero-1 {
+      width: 300px;
+      height: 300px;
+      top: -50px;
+      left: -100px;
+      background: #c4ffd4;
+    }
+    .shape-hero-2 {
+      width: 200px;
+      height: 200px;
+      bottom: -50px;
+      right: -50px;
+      background: #ffd3f5;
+    }
+    /* About shapes */
+    .shape-about-1 {
+      width: 250px;
+      height: 250px;
+      top: 50px;
+      right: 10%;
+      background: #91e1ff;
+    }
+    .shape-about-2 {
+      width: 400px;
+      height: 400px;
+      bottom: -80px;
+      left: 5%;
+      background: #ceffef;
+    }
+    /* Experience shapes */
+    .shape-experience-1 {
+      width: 280px;
+      height: 280px;
+      top: -40px;
+      left: 15%;
+      background: #ffeec5; 
+    }
+    .shape-experience-2 {
+      width: 350px;
+      height: 350px;
+      bottom: -100px;
+      right: 5%;
+      background: #ffc7ce;
+    }
+    /* Skills shapes */
+    .shape-skills-1 {
+      width: 300px;
+      height: 300px;
+      top: 0;
+      left: -100px;
+      background: #cde7fe;
+    }
+    .shape-skills-2 {
+      width: 250px;
+      height: 250px;
+      bottom: -50px;
+      right: 0;
+      background: #fff4d4;
+    }
+    /* Experiments shapes */
+    .shape-experiments-1 {
+      width: 360px;
+      height: 360px;
+      top: -80px;
+      left: 10%;
+      background: #c7f7ef;
+    }
+    .shape-experiments-2 {
+      width: 220px;
+      height: 220px;
+      bottom: -50px;
+      right: 10%;
+      background: #f9eaff;
+    }
+    /* Contact shapes */
+    .shape-contact-1 {
+      width: 260px;
+      height: 260px;
+      top: 20px;
+      left: 5%;
+      background: #ffd5cc;
+    }
+    .shape-contact-2 {
+      width: 300px;
+      height: 300px;
+      bottom: -70px;
+      right: 15%;
+      background: #c9ffe8;
+    }
+
+    /* Footer styling (optional) */
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      padding: 30px 0;
+      margin-top: 3rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .info-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .card {
+        width: 90%;
+      }
+      .hero .title {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#experiments">Experiments</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero">
+    <!-- Hero shapes -->
+    <div class="bg-shape shape-hero-1 parallax-hero-1"></div>
+    <div class="bg-shape shape-hero-2 parallax-hero-2"></div>
+
+    <h1 class="title">Hi, I’m Your Name!</h1>
+    <p>
+      Welcome to my CV. I’m a [your role/occupation] with a passion for 
+      creating beautiful experiences. Scroll down to learn more!
+    </p>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about" class="about">
+    <!-- About shapes -->
+    <div class="bg-shape shape-about-1 parallax-about-1"></div>
+    <div class="bg-shape shape-about-2 parallax-about-2"></div>
+
+    <h2>About Me</h2>
+    <p>
+      A short introduction about who you are, your interests, and 
+      what drives you professionally.
+    </p>
+    <div class="info-cards">
+      <div class="card">
+        <h3>Education</h3>
+        <p>Briefly describe your academic background or any 
+          relevant courses/certifications.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Hobbies</h3>
+        <p>List some of your hobbies or passions. Show that you’re human!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE SECTION -->
+  <section id="experience" class="experience">
+    <!-- Experience shapes -->
+    <div class="bg-shape shape-experience-1 parallax-experience-1"></div>
+    <div class="bg-shape shape-experience-2 parallax-experience-2"></div>
+
+    <h2>My Experience</h2>
+    <p>
+      Outline your work experience, highlighting the most 
+      significant accomplishments or roles.
+    </p>
+    <div class="info-cards">
+      <div class="card">
+        <h3>Job Title One</h3>
+        <p>Company, Year(s), Achievements, etc.</p>
+      </div>
+      <div class="card">
+        <h3>Job Title Two</h3>
+        <p>Company, Year(s), Achievements, etc.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills" class="skills">
+    <!-- Skills shapes -->
+    <div class="bg-shape shape-skills-1 parallax-skills-1"></div>
+    <div class="bg-shape shape-skills-2 parallax-skills-2"></div>
+
+    <h2>Skills & Tools</h2>
+    <p>
+      Mention your core technical or soft skills, plus any special tools 
+      you’ve mastered. 
+    </p>
+    <div class="info-cards">
+      <div class="card">
+        <h3>Technical Skills</h3>
+        <p>List relevant languages, frameworks, etc.</p>
+      </div>
+      <div class="card">
+        <h3>Soft Skills</h3>
+        <p>Communication, teamwork, problem-solving, etc.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIMENTS SECTION -->
+  <section id="experiments" class="experiments">
+    <!-- Experiments shapes -->
+    <div class="bg-shape shape-experiments-1 parallax-experiments-1"></div>
+    <div class="bg-shape shape-experiments-2 parallax-experiments-2"></div>
+
+    <h2>Experiments</h2>
+    <p>
+      Check out some prototypes, side projects, or playful experiments I’ve been developing!
+    </p>
+    <div class="info-cards">
+      <div class="card">
+        <h3>Experiment #1</h3>
+        <p>
+          A brief description of your project. 
+          <br><br>
+          <a href="https://example.com" target="_blank" style="text-decoration: underline;">
+            View Project
+          </a>
+        </p>
+      </div>
+      <div class="card">
+        <h3>Experiment #2</h3>
+        <p>
+          Another interesting link or experiment.
+          <br><br>
+          <a href="https://example.com" target="_blank" style="text-decoration: underline;">
+            View Project
+          </a>
+        </p>
+      </div>
+      <!-- Add more as needed -->
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact">
+    <!-- Contact shapes -->
+    <div class="bg-shape shape-contact-1 parallax-contact-1"></div>
+    <div class="bg-shape shape-contact-2 parallax-contact-2"></div>
+
+    <h2>Contact Me</h2>
+    <p>
+      I’m always interested in hearing about new opportunities. 
+      Reach out if you’d like to chat!
+    </p>
+    <!-- Instead of a standard form, just do an email link or button -->
+    <a href="mailto:your.email@example.com"
+       style="text-decoration: none; color: var(--text-color); font-weight: bold; margin-top:1rem; display:inline-block;">
+       Send me an email
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; <span id="year"></span> Your Name | All rights reserved.
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Update year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    /*---------------------------------------
+     * 1) Fade-in animations for each section
+     ---------------------------------------*/
+    gsap.utils.toArray("section").forEach((sec) => {
+      gsap.from(sec, {
+        scrollTrigger: {
+          trigger: sec,
+          start: "top 80%", 
+          toggleActions: "play none none reverse",
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1
+      });
+    });
+
+    /*--------------------------------------------
+     * 2) Parallax effect for every shape
+     ---------------------------------------------*/
+    // Hero
+    gsap.to(".parallax-hero-1", {
+      yPercent: -30, 
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+    gsap.to(".parallax-hero-2", {
+      yPercent: 30,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+    // About
+    gsap.to(".parallax-about-1", {
+      yPercent: -40,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+    gsap.to(".parallax-about-2", {
+      yPercent: 20,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+    // Experience
+    gsap.to(".parallax-experience-1", {
+      yPercent: -30,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#experience",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+    gsap.to(".parallax-experience-2", {
+      yPercent: 30,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#experience",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+    // Skills
+    gsap.to(".parallax-skills-1", {
+      yPercent: -40,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#skills",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+    gsap.to(".parallax-skills-2", {
+      yPercent: 20,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#skills",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+    // Experiments
+    gsap.to(".parallax-experiments-1", {
+      yPercent: -30,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#experiments",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+    gsap.to(".parallax-experiments-2", {
+      yPercent: 30,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#experiments",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+    // Contact
+    gsap.to(".parallax-contact-1", {
+      yPercent: -40,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#contact",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+    gsap.to(".parallax-contact-2", {
+      yPercent: 20,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#contact",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+  </script>
+</body>
+</html>
