@@ -81,6 +81,7 @@
       background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(5px);
       z-index: 999;
+      flex-wrap: wrap;
     }
     nav a {
       text-decoration: none;
@@ -101,6 +102,15 @@
     }
     nav a:hover::after {
       width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        justify-content: space-around;
+      }
+      nav a {
+        margin: 10px 5px;
+      }
     }
 
     /* Section colors */
