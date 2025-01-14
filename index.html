@@ -138,7 +138,7 @@
       padding: 2rem;
       border-radius: 10px;
       width: 280px;
-      height: 300px;
+      height: 240px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
       transition: transform 0.3s ease;
       position: relative;
@@ -185,20 +185,26 @@
 
     /* Modal styling */
     .modal {
-      display: none; /* Hidden by default */
+      display: flex; /* Use flexbox for centering */
+      align-items: center;
+      justify-content: center;
       position: fixed;
-      top: 0; 
+      top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.6);
+      background-color: rgba(0, 0, 0, 0.6);
       z-index: 9999;
-      align-items: center;
-      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
+
     .modal.active {
-      display: flex;
+      opacity: 1;
+      visibility: visible;
     }
+
     .modal-content {
       background: #fff;
       padding: 2rem;
@@ -208,13 +214,14 @@
       max-height: 80vh;
       overflow-y: auto;
       position: relative;
-      /* Smooth zoom-in */
       transform: scale(0.9);
       transition: transform 0.3s ease;
     }
+
     .modal.active .modal-content {
       transform: scale(1);
     }
+
     .modal-close {
       position: absolute;
       top: 10px;
@@ -247,6 +254,82 @@
         -webkit-line-clamp: 10;
       }
     }
+
+    /* Additional shape styles */
+    .shape-about-1 {
+      width: 250px;
+      height: 250px;
+      top: 50px;
+      right: -50px;
+      background: #ffc8e6;
+    }
+    .shape-about-2 {
+      width: 180px;
+      height: 180px;
+      bottom: 100px;
+      left: -30px;
+      background: #ffb6c1;
+    }
+    
+    .shape-exp-1 {
+      width: 280px;
+      height: 280px;
+      top: 30px;
+      left: -80px;
+      background: #b6e6ff;
+    }
+    .shape-exp-2 {
+      width: 220px;
+      height: 220px;
+      bottom: 60px;
+      right: -40px;
+      background: #a6d5ff;
+    }
+    
+    .shape-skills-1 {
+      width: 260px;
+      height: 260px;
+      top: -30px;
+      right: -60px;
+      background: #d8c8ff;
+    }
+    .shape-skills-2 {
+      width: 190px;
+      height: 190px;
+      bottom: 80px;
+      left: -40px;
+      background: #c8b5ff;
+    }
+    
+    .shape-experiments-1 {
+      width: 240px;
+      height: 240px;
+      top: 40px;
+      left: -50px;
+      background: #c8ffc8;
+    }
+    .shape-experiments-2 {
+      width: 200px;
+      height: 200px;
+      bottom: 50px;
+      right: -30px;
+      background: #b5ffb5;
+    }
+    
+    .shape-contact-1 {
+      width: 270px;
+      height: 270px;
+      top: -40px;
+      right: -70px;
+      background: #fff2b5;
+    }
+    .shape-contact-2 {
+      width: 210px;
+      height: 210px;
+      bottom: 70px;
+      left: -50px;
+      background: #ffe8a6;
+    }
   </style>
 </head>
 <body>
@@ -276,60 +359,51 @@
 
   <!-- ABOUT SECTION -->
   <section id="about" class="about">
+    <div class="bg-shape shape-about-1 parallax-about-1"></div>
+    <div class="bg-shape shape-about-2 parallax-about-2"></div>
     <h2>About Me</h2>
     <p>
-      I hold a Master’s degree in Rocket Propulsion Engineering (with honors). Despite 
-      starting in the aerospace world, my curiosity led me to teach myself Python in 2015 
-      and pivot into software development. I love to dig deep into algorithms, cost 
-      optimization, and seamlessly blend scientific rigor with innovative tech solutions.
+      I’m a solutions-focused software engineer with a knack for turning complex challenges into innovative, scalable solutions. With 9+ years of experience, I specialize in architecture design, cost optimization, and leading high-performing teams. My approach blends technical expertise with a passion for practical problem-solving.
     </p>
     <p>
-      I’ve spent 9 exciting years at EOS Data Analytics—starting as an intern, evolving into 
-      a Team Lead, and now serving as a Solutions Architect. Collaborating closely with our 
-      CTO on technical strategy, I enjoy building high-performing teams, guiding 
-      large-scale architecture, and crafting innovative solutions for clients.
+      Starting my career in rocket propulsion, I later transitioned to IT, driven by curiosity and a love for technology. Today, I help craft impactful products and guide technical strategies, particularly in the field of satellite data processing and agricultural analytics.
     </p>
 
     <div class="info-cards">
-      <!-- ABOUT CARD / KEY HIGHLIGHTS -->
+      <!-- KEY HIGHLIGHTS CARD -->
       <div 
         class="card" 
         data-fulltext="
-          <p>
-            I thrive on coding, diving into algorithmic challenges, and ensuring that 
-            each product is not only efficient but also delightful to use. I’ve cut 
-            infrastructure costs by 50% through proactive data cleanups, caching strategies, 
-            and clever optimizations — always focusing on real user needs.
-          </p>
-        </br>
-          <h3>
-            Major products I've contributed to:
-          </h3>
-          <ul>
-            <li>
-              <a href='https://crop-monitoring.eos.com' target='_blank'>
-                Crop Monitoring
-              </a>
-            </li>
-            <li>
-              <a href='https://eos.com/landviewer' target='_blank'>
-                EOS LandViewer
-              </a>
-            </li>
-          </ul>
-        </br>
-          <h3>My Journey</h3>
-          <ul>
-            <li>Graduated with honors in Rocket Propulsion Engineering</li>
-            <li>Self-taught Python in 2015 and transitioned to software development</li>
-            <li>Currently planning to pursue a Master’s in Computer Science, aiming for a PhD</li>
-            <li>9 years at EOS Data Analytics: from Intern to Solutions Architect</li>
-            <li>Actively consult with our CTO for high-impact technical decisions</li>
-          </ul>
+        <h3>Career Highlights</h3>
+        <ul>
+          <li>9+ years at EOS Data Analytics, from Intern to Solutions Architect</li>
+          <li>Expertise in algorithms, scalable architectures, and cost-efficient solutions</li>
+          <li>Key contributor to products like <a href='https://crop-monitoring.eos.com' target='_blank'>Crop Monitoring</a> and <a href='https://eos.com/landviewer' target='_blank'>LandViewer</a></li>
+          <li>Developed crypto trading bots for exchanges, ensuring efficient and reliable automation</li>
+          <li>Built Telegram bots for streamlined communication and task automation</li>
+          <li>Implemented CRM integrations (e.g., Zoho) to enhance business workflows</li>
+          <li>Worked closely with the CTO to shape technical strategy and team culture</li>
+        </ul>
         "
       >
         <h3>Key Highlights</h3>
-        <p>Rocket engineer turned software pro, optimizing costs and leading tech innovation...</p>
+        <p>9+ years in tech, leading architecture and innovation...</p>
+      </div>
+
+      <!-- IT JOURNEY CARD -->
+      <div 
+        class="card" 
+        data-fulltext="
+          <h3>My IT Journey</h3>
+          <ul>
+            <li>Started in aerospace, transitioned to IT in 2015</li>
+            <li>Self-taught Python, driven by a passion for automation</li>
+            <li>Continually improving with plans to pursue PhD in Computer Science</li>
+          </ul>
+        "
+      >
+        <h3>My IT Journey</h3>
+        <p>From rockets to Python — always driven by curiosity...</p>
       </div>
 
       <!-- HOBBIES CARD -->
@@ -338,8 +412,9 @@
         data-fulltext="
           <h3>Beyond Work</h3>
           <ul>
-            <li>Daily runs (3–5 km) to stay energized</li>
-            <li>Bouldering enthusiast, sharing the fun with my 6-year-old son</li>
+            <li>Daily runner, 3–5 km for energy and focus</li>
+            <li>Bouldering enthusiast, often climbing with my son</li>
+            <li>iPhone photography, capturing the beauty of everyday life</li>
             <li>Occasional PlayStation gaming to unwind</li>
             <li>iPhone photography—capturing everyday moments</li>
             <li>Enjoy craft beer (in moderation!), celebrating small wins in life</li>
@@ -347,13 +422,15 @@
         "
       >
         <h3>Hobbies</h3>
-        <p>Running, bouldering, PlayStation, casual photography, craft beer...</p>
+        <p>Running, climbing, photography, gaming, and craft beer...</p>
       </div>
     </div>
   </section>
 
   <!-- EXPERIENCE SECTION -->
   <section id="experience" class="experience">
+    <div class="bg-shape shape-exp-1 parallax-exp-1"></div>
+    <div class="bg-shape shape-exp-2 parallax-exp-2"></div>
     <h2>My Experience</h2>
     <p>
       From aerospace engineering to leading complex software projects, I bring a unique 
@@ -364,28 +441,43 @@
     <div class="info-cards">
       <!-- EOS CARD -->
       <div
-        class="card"
-        data-fulltext="
-          <h3>EOS Data Analytics</h3>
-          <ul>
-            <li>Solutions Architect & Team Lead (2016 – Present)</li>
-            <li>Oversee backend architecture for flagship products like Crop Monitoring & LandViewer</li>
-            <li>
-              Reduced infrastructure expenses by 50% through data cleanups, 
-              removing unnecessary code, caching, and restricting costly test subscriptions
-            </li>
-            <li>Managed a team of 10 talented developers, fostering innovation and scalability</li>
-            <li>
-              Developed drivers for diverse image formats (TIFF, JPEG2000, PNG, MRF) 
-              to handle large geospatial datasets
-            </li>
-            <li>
-              I’m passionate about building solutions that push boundaries, whether 
-              it's optimizing cloud costs or experimenting with new AI-powered features.
-            </li>
-          </ul>
-        "
-      >
+  class="card"
+  data-fulltext="
+    <h3>EOS Data Analytics</h3>
+    <ul>
+      <li>Solutions Architect & Team Lead (2016 – Present)</li>
+      <li>Oversee backend architecture for flagship products like Crop Monitoring & LandViewer</li>
+      <li>
+        Designed and maintained a microservices architecture, ensuring scalability and resilience
+      </li>
+      <li>
+        Built and supported critical services, including:
+        <ul>
+          <li>Authorization and authentication service for secure user access</li>
+          <li>
+            Payment service integrated with third-party platforms like Stripe and FastSprint
+          </li>
+          <li>
+            Geospatial data processing service, enabling efficient analysis of large datasets
+          </li>
+        </ul>
+      </li>
+      <li>
+        Reduced infrastructure expenses by 50% through data cleanups, removing unnecessary code, 
+        caching, and restricting costly test subscriptions
+      </li>
+      <li>Managed a team of 10 talented developers, fostering innovation and scalability</li>
+      <li>
+        Developed drivers for diverse image formats (TIFF, JPEG2000, PNG, MRF) 
+        to handle large geospatial datasets
+      </li>
+      <li>
+        Passionate about building solutions that push boundaries, whether it's optimizing 
+        cloud costs or experimenting with new AI-powered features.
+      </li>
+    </ul>
+  "
+>
         <h3>EOS Data Analytics</h3>
         <p>
           Team Lead & Solutions Architect. Led backend initiatives, halved infra costs, 
@@ -393,16 +485,37 @@
         </p>
       </div>
 
+      <div
+      class="card"
+      data-fulltext="
+        <h3>Side Projects & Freelance</h3>
+        <ul>
+          <li>
+            <strong>Crypto Trading Bots:</strong> Developed and maintained bots for automated trading on cryptocurrency exchanges, optimizing performance and reliability under dynamic market conditions.
+          </li>
+          <li>
+            <strong>Telegram Bots:</strong> Created custom bots to automate tasks, streamline communication, and enhance user engagement for various projects.
+          </li>
+          <li>
+            <strong>Python Instructor:</strong> Taught Python programming to beginners and intermediate learners, focusing on practical problem-solving, algorithms, and automation tools.
+          </li>
+          <li>
+            Successfully delivered freelance projects, ranging from small-scale automation tools to robust integrations with third-party APIs.
+          </li>
+        </ul>
+      "
+    >
+      <h3>Side Projects</h3>
+      <p>Crypto trading bots, Telegram automation, and teaching Python...</p>
+    </div>
+
       <!-- KB YUZHNOYE CARD -->
       <div
         class="card"
         data-fulltext="
           <h3>Yuzhnoye Design Bureau</h3>
-          <p>
-            <strong>Role:</strong> Rocket Propulsion Engineering
-          </p>
           <ul>
-            <li>Gained hands-on experience with complex engineering and R&D projects</li>
+            <li>As a Rocket Propulsion Engineering I gained hands-on experience with complex engineering and R&D projects</li>
             <li>Acquired analytical prowess and problem-solving mindset that transitioned seamlessly into software</li>
             <li>Developed a deep passion for precision and reliability in every product I build</li>
             <li>
@@ -420,6 +533,8 @@
 
   <!-- SKILLS SECTION -->
   <section id="skills" class="skills">
+    <div class="bg-shape shape-skills-1 parallax-skills-1"></div>
+    <div class="bg-shape shape-skills-2 parallax-skills-2"></div>
     <h2>Skills & Tools</h2>
     <p>
       I specialize in backend development and cloud-native solutions, 
@@ -429,55 +544,90 @@
     <div class="info-cards">
       <!-- TECH SKILLS CARD -->
       <div
-        class="card"
-        data-fulltext="
-          <h3>Technical Skills</h3>
-          <ul>
-            <li>Expert in Python, Django, Django Channels, and asyncio</li>
-            <li>Proficient with PostgreSQL, focusing on performance and data optimization</li>
-            <li>Experienced with Numpy, Pandas for advanced data analytics</li>
-            <li>Developed custom drivers for large geospatial image formats (TIFF, JPEG2000, PNG, MRF)</li>
-            <li>Skilled at cloud cost optimization—cutting unnecessary usage and speeding up deployments</li>
-            <li>Telegram bot development (Queue Monitor, crypto trading bots)</li>
-            <li>Contributor to the CCXT library for crypto exchange integrations</li>
-            <li>
-            I constantly explore the latest LLM techniques, integrating AI-driven features 
-            whenever they can benefit product goals and user experiences.
-            </li>
-          </ul>
-        "
-      >
-        <h3>Technical Skills</h3>
-        <p>Python (Django, asyncio), data optimizations, image drivers, Telegram bots...</p>
-      </div>
+  class="card"
+  data-fulltext="
+    <h3>Technical Skills</h3>
+    <ul>
+      <li>Expert in Python and its frameworks: Django, Django Channels, Tornado, and asyncio</li>
+      <li>Proficient in message brokering systems: Kafka, RabbitMQ, and Redis</li>
+      <li>Database expertise: PostgreSQL (performance tuning and optimization), SQLite</li>
+      <li>Experienced with Celery for distributed task queues</li>
+      <li>Cloud platforms: AWS (EC2, S3, Lambda), Google Cloud (GCP services)</li>
+      <li>Containerization and CI/CD: Docker, GitLab CI/CD, Jenkins</li>
+      <li>Advanced data analytics: Numpy, Pandas, and working with large datasets</li>
+      <li>Geospatial data processing: Developed custom drivers for image formats (TIFF, JPEG2000, PNG, MRF)</li>
+      <li>API integration and development: OpenAI API, third-party APIs (e.g., Stripe, Zoho, FastSprint)</li>
+      <li>Telegram bot development and CCXT library contribution for crypto trading bots</li>
+      <li>Cloud cost optimization: Reducing infrastructure expenses and improving deployment efficiency</li>
+      <li>
+        Passionate about exploring AI and machine learning, integrating LLM-driven features into products 
+        for enhanced user experience.
+      </li>
+    </ul>
+  "
+>
+  <h3>Technical Skills</h3>
+  <p>Python, Django, Kafka, RabbitMQ, PostgreSQL, AWS, Docker, AI integration...</p>
+</div>
 
       <!-- SOFT SKILLS CARD -->
       <div
-        class="card"
-        data-fulltext="
-          <h3>Soft Skills</h3>
-          <ul>
-            <li>Team Leadership & Mentorship—leading 10+ developers in high-pressure environments</li>
-            <li>Collaboration with cross-functional teams, from product managers to data scientists</li>
-            <li>Analytical & Creative Problem-Solving, backed by a strong scientific foundation</li>
-            <li>Adaptability—proven by transitioning from rocket engines to software architecture</li>
-            <li>Passion for Teaching — previously led Python web development and Telegram bot courses 
-              at <a href='https://robotdreams.cc/uk/course/1470-python-developer' target='_blank'>RobotDreams</a></li>
-            <li>
-              My mission is to craft solutions that resonate with both technical 
-              and business stakeholders, ensuring lasting impact.
-            </li>
-          </ul>
-        "
-      >
-        <h3>Soft Skills</h3>
-        <p>Leadership, communication, problem-solving, adaptability, love for continuous learning...</p>
-      </div>
+  class="card"
+  data-fulltext="
+    <h3>Soft Skills</h3>
+    <ul>
+      <li>
+        <strong>Empathy & Influence:</strong> I deeply understand people and the essence of their challenges, 
+        which allows me to foster trust, resolve conflicts, and guide my team toward shared goals. My colleagues often reflect my approach, adopting my problem-solving methods and work ethic.
+      </li>
+      <li>
+        <strong>Ownership & Responsibility:</strong> I live and breathe the projects I work on, 
+        always taking full accountability for their success. I am proactive in identifying and solving 
+        challenges, even if it requires learning new skills or adopting innovative tools.
+      </li>
+      <li>
+        <strong>Customer-Centric Thinking:</strong> Every decision I make is driven by the end user's needs. 
+        Whether optimizing performance, improving usability, or enhancing reliability, I aim to deliver solutions that bring tangible value.
+      </li>
+      <li>
+        <strong>Leadership & Mentorship:</strong> I lead by example, fostering a collaborative and supportive 
+        environment. Overseeing teams of 10+ developers, I’ve guided them to excel under tight deadlines 
+        and complex requirements.
+      </li>
+      <li>
+        <strong>Innovative Problem-Solving:</strong> My analytical mindset and creative approach enable me 
+        to find solutions that go beyond the obvious, whether by simplifying processes, integrating new 
+        technologies, or rethinking architectural design.
+      </li>
+      <li>
+        <strong>Effective Communication:</strong> I bridge technical and business perspectives, ensuring that 
+        stakeholders and team members are aligned and empowered to contribute effectively. My ability to 
+        articulate complex concepts in an accessible way has been key in earning trust and driving progress.
+      </li>
+      <li>
+        <strong>Passion for Teaching:</strong> Sharing knowledge is integral to who I am. Whether mentoring 
+        colleagues or teaching Python development and Telegram bot creation at 
+        <a href='https://robotdreams.cc/uk/course/1470-python-developer' target='_blank'>RobotDreams</a>, 
+        I find joy in helping others grow and succeed.
+      </li>
+      <li>
+        <strong>Relentless Improvement:</strong> I am committed to continuous growth—both for myself and the 
+        projects I work on. I actively seek feedback, embrace challenges, and adapt to new trends to ensure 
+        my work remains impactful and relevant.
+      </li>
+    </ul>
+  "
+>
+  <h3>Soft Skills</h3>
+  <p>Empathy, ownership, leadership, innovation, effective communication, teaching...</p>
+</div>
     </div>
   </section>
 
   <!-- EXPERIMENTS SECTION -->
   <section id="experiments" class="experiments">
+    <div class="bg-shape shape-exp-1 parallax-experiments-1"></div>
+    <div class="bg-shape shape-exp-2 parallax-experiments-2"></div>
     <h2>Experiments</h2>
     <p>
       I enjoy taking on side projects that challenge my creativity 
@@ -487,31 +637,50 @@
     <div class="info-cards">
       <!-- PERSONALIZED ASSISTANT CARD -->
       <div
-        class="card"
-        data-fulltext="
-          <h3>Personalized Assistants</h3>
-          <p>
-            <a href='https://github.com/danilbogdan/oh_my_buddy' target='_blank'>oh_my_buddy</a> is my passion project that integrates Large Language Models to 
-            build personalized digital assistants for multiple interfaces — web, Telegram, and more.
+  class="card"
+  data-fulltext="
+    <h3>Personalized Assistants</h3>
+    <p>
+      <a href='https://buddy.danilbogdan.com/' target='_blank'>oh_my_buddy</a> is my passion project 
+      that leverages Large Language Models to create personalized digital assistants for 
+      various interfaces—web, Telegram, and more. This innovative platform is designed to 
+      deliver tailored assistance for diverse needs and scenarios.
+    </p>
+    <p>
+      Future plans include transforming it into a comprehensive service with multiple assistants, 
+      each specialized in specific domains and equipped with unique knowledge and skills. 
+      Imagine mock interview assistants conducting practice interviews and saving insights directly 
+      to Notion, psychologists offering support in an interpersonal approach, or IT-focused Polish 
+      language tutors helping users refine their professional vocabulary.
+    </p>
+    <p>
+      oh_my_buddy will also integrate seamlessly with various services, making it a versatile tool 
+      for personal and professional growth. Whether you need a coach, a mentor, or a productivity 
+      partner, this platform is designed to cater to your specific goals and streamline your workflow.
+    </p>
+              <p>
+            <a href='https://github.com/danilbogdan/oh_my_buddy' target='_blank'>View on GitHub</a>
           </p>
-        "
-      >
-        <h3>oh_my_buddy</h3>
-        <p>LLM-powered personal assistant for web & Telegram interfaces...</p>
-      </div>
+  "
+>
+  <h3>oh_my_buddy</h3>
+  <p>LLM-powered assistants for mock interviews, language learning, and beyond...</p>
+</div>
 
       <!-- QUEUE MONITOR CARD -->
       <div
         class="card"
         data-fulltext="
           <h3>Queue Monitor</h3>
-          <p>
-            A Telegram bot that tracks available appointment slots for official 
-            passport services and instantly notifies users when a slot opens.
-          </p>
-          <p>
-            <a href='https://github.com/danilbogdan/queue_monitor' target='_blank'>View on GitHub</a>
-          </p>
+    <p>
+      A Telegram bot designed to track available appointment slots for official passport 
+      services and instantly notify users when a slot opens. Initially created to assist 
+      Ukrainians living abroad, the bot gained significant popularity among those seeking 
+      to schedule passport services efficiently.
+    </p>
+    <p>
+      <a href='https://github.com/danilbogdan/queue_monitor' target='_blank'>View on GitHub</a>
+    </p>
         "
       >
         <h3>Queue Monitor</h3>
@@ -540,6 +709,8 @@
 
   <!-- CONTACT SECTION -->
   <section id="contact" class="contact">
+    <div class="bg-shape shape-contact-1 parallax-contact-1"></div>
+    <div class="bg-shape shape-contact-2 parallax-contact-2"></div>
     <h2>Contact Me</h2>
     <p>
       I’m always open to discussing new opportunities — be it 
@@ -640,6 +811,61 @@
       }
     });
     // ...repeat parallax for about, experience, skills, experiments, contact shapes...
+
+    // Parallax animations for all sections
+    const parallaxSections = [
+      {
+        section: '#about',
+        elements: [
+          { class: '.parallax-about-1', yPercent: -25 },
+          { class: '.parallax-about-2', yPercent: 35 }
+        ]
+      },
+      {
+        section: '#experience',
+        elements: [
+          { class: '.parallax-exp-1', yPercent: -30 },
+          { class: '.parallax-exp-2', yPercent: 40 }
+        ]
+      },
+      {
+        section: '#skills',
+        elements: [
+          { class: '.parallax-skills-1', yPercent: -35 },
+          { class: '.parallax-skills-2', yPercent: 30 }
+        ]
+      },
+      {
+        section: '#experiments',
+        elements: [
+          { class: '.parallax-experiments-1', yPercent: -28 },
+          { class: '.parallax-experiments-2', yPercent: 32 }
+        ]
+      },
+      {
+        section: '#contact',
+        elements: [
+          { class: '.parallax-contact-1', yPercent: -33 },
+          { class: '.parallax-contact-2', yPercent: 38 }
+        ]
+      }
+    ];
+
+    // Create parallax effect for each section
+    parallaxSections.forEach(section => {
+      section.elements.forEach(element => {
+        gsap.to(element.class, {
+          yPercent: element.yPercent,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section.section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        });
+      });
+    });
 
     // Modal logic
     const modal = document.getElementById('modal');
