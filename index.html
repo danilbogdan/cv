@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My CV | Pastel Single-Page with Extra Parallax</title>
+  <title>Bohdan Danyliuk | Software Development, IT Consulting, IT Education</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- Google Fonts -->
@@ -340,6 +340,53 @@
       left: -50px;
       background: #ffe8a6;
     }
+
+    /* Parallax shapes for business-info section */
+    .shape-business-1 {
+      width: 250px;
+      height: 250px;
+      top: -30px;
+      left: -50px;
+      background: #ffd4b3;
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.3;
+      z-index: 1;
+    }
+    .shape-business-2 {
+      width: 200px;
+      height: 200px;
+      bottom: -40px;
+      right: -40px;
+      background: #ffc299;
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    /* Card colors corresponding to section backgrounds */
+    .hero .card {
+      background: #fff5cc; /* Less bright pastel yellow */
+    }
+    .about .card {
+      background: #ffe4f0; /* Less bright pastel pink */
+    }
+    .experience .card {
+      background: #e3f4ff; /* Less bright pastel blue */
+    }
+    .skills .card {
+      background: #f0eaff; /* Less bright pastel purple */
+    }
+    .experiments .card {
+      background: #e3ffe3; /* Less bright pastel green */
+    }
+    .business-info .card {
+      background: #fff2e6; /* Light pastel orange */
+    }
+    .contact .card {
+      background: #fff5cc; /* Less bright pastel yellow */
+    }
   </style>
 </head>
 <body>
@@ -351,6 +398,7 @@
     <a href="#experience">Experience</a>
     <a href="#skills">Skills</a>
     <a href="#experiments">Experiments</a>
+    <a href="#business-info">Business</a>
     <a href="#contact">Contact</a>
   </nav>
 
@@ -361,10 +409,58 @@
 
     <h1 class="title">Hi, I’m Bohdan Danyliuk!</h1>
     <p>
-      Welcome to my CV. I’m a Solutions Architect and Software Engineer with a 
+      Welcome to my page. I’m a Solutions Architect and Software Engineer with a 
       rocket-engineering background, a passion for creative tech solutions, and 
       a track record of transforming complex ideas into impactful products.
     </p>
+
+    <div class="info-cards">
+      <!-- EDUCATION CARD -->
+      <div 
+        class="card" 
+        data-fulltext="
+          <h3>Education</h3>
+          <p>
+            I teach programming and help individuals prepare for technical interviews. 
+            My goal is to empower learners with the skills and confidence they need to succeed 
+            in the tech industry.
+          </p>
+        "
+      >
+        <h3>Education</h3>
+        <p>Teaching programming and preparing for tech interviews...</p>
+      </div>
+
+      <!-- CONSULTING CARD -->
+      <div 
+        class="card" 
+        data-fulltext="
+          <h3>Consulting</h3>
+          <p>
+            I provide consultations on software development and architecture, 
+            helping businesses design scalable, efficient, and cost-effective solutions.
+          </p>
+        "
+      >
+        <h3>Consulting</h3>
+        <p>Consultations on software development and architecture...</p>
+      </div>
+
+      <!-- SOFTWARE DEVELOPMENT CARD -->
+      <div 
+        class="card" 
+        data-fulltext="
+          <h3>Software Development</h3>
+          <p>
+            I develop high-quality software tailored to meet specific business needs, 
+            ensuring reliability, scalability, and performance.
+          </p>
+        "
+      >
+        <h3>Software Development</h3>
+        <p>Developing high-quality, tailored software solutions...</p>
+      </div>
+    </div>
   </section>
 
   <!-- ABOUT SECTION -->
@@ -717,6 +813,34 @@
     </div>
   </section>
 
+  <!-- BUSINESS INFORMATION SECTION -->
+  <section id="business-info" class="business-info" style="padding:80px 20px; text-align:center; background: #ffe8d6; position:relative; overflow:hidden;">
+    <div class="bg-shape shape-business-1 parallax-business-1" style="background: #ffd4b3;"></div>
+    <div class="bg-shape shape-business-2 parallax-business-2" style="background: #ffc299;"></div>
+
+    <h2>Business Information</h2>
+    <div 
+      class="card" 
+      data-fulltext="
+        <h3>Business Information</h3>
+        <p><strong>Business Name:</strong> Bohdan Danyliuk</p>
+        <p><strong>Services Offered:</strong> Professional IT consulting, IT Education, solutions architecture, and custom software development.</p>
+        <p><strong>Tax Identification (NIP):</strong> 8952257294</p>
+        <p><strong>Business Registration (REGON):</strong> 525340880</p>
+        <p><strong>Customer Service:</strong> For inquiries, please contact <a href='mailto:danilyuk.bogdan@gmail.com'>danilyuk.bogdan@gmail.com</a>.</p>
+        <p>
+          <strong>Refund, Dispute & Cancellation Policy:</strong> Our consulting services are offered with a satisfaction guarantee. For refund, cancellation, or dispute resolution, please reach out to me via email.
+        </p>
+        <p>
+          <strong>Terms & Conditions:</strong> By engaging our services, you agree to our standard terms which are available upon request.
+        </p>
+      "
+    >
+      <h3>Business Overview</h3>
+      <p>Click to view detailed business information...</p>
+    </div>
+  </section>
+
   <!-- CONTACT SECTION -->
   <section id="contact" class="contact">
     <div class="bg-shape shape-contact-1 parallax-contact-1"></div>
@@ -745,7 +869,7 @@
         <i class="fab fa-linkedin fa-2x"></i>
       </a>
       <!-- Instagram -->
-      <a href="https://instagram.com/progger_bob/" target="_blank" style="color:#d6249f;">
+      <a href="https://instagram.com/danilbogdan93/" target="_blank" style="color:#d6249f;">
         <i class="fab fa-instagram fa-2x"></i>
       </a>
     </div>
@@ -858,6 +982,13 @@
           { class: '.parallax-contact-1', yPercent: -33 },
           { class: '.parallax-contact-2', yPercent: 38 }
         ]
+      },
+      {
+        section: '#business-info',
+        elements: [
+          { class: '.parallax-business-1', yPercent: -20 },
+          { class: '.parallax-business-2', yPercent: 25 }
+        ]
       }
     ];
 
@@ -886,8 +1017,10 @@
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('click', () => {
         const fullText = card.getAttribute('data-fulltext');
-        modalBody.innerHTML = fullText; // Use innerHTML to render bullet points & links
-        modal.classList.add('active');
+        if (fullText) {
+          modalBody.innerHTML = fullText; // Use innerHTML to render content
+          modal.classList.add('active');
+        }
       });
     });
 
